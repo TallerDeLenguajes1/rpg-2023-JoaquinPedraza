@@ -3,11 +3,11 @@ using ProyectoTaller;
 
 Console.WriteLine("Hello, World!");
 
-FabricaDeCaballos fabrica = new FabricaDeCaballos();
+CarreraDeCaballos carrera = new CarreraDeCaballos();
 
-List<Caballo> participantes = fabrica.CrearCaballos();
-
-Caballo caballo = fabrica.CrearCaballo();
-
+carrera.ObtenerParticipantes();
+carrera.RealizarTorneo();
+carrera.ObtenerGanador();
 
 Console.WriteLine("Helloworld!");
+

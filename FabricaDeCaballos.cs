@@ -20,23 +20,23 @@ namespace ProyectoTaller
             switch (caballo.Estrellas)
             {
                 case 3:
-                    caballo.Velocidad = rnd.Next(50, 65);
-                    caballo.EnergEsprint = rnd.Next(50, 65);
-                    caballo.Aceleracion = rnd.Next(50, 65);
+                    caballo.Velocidad = rnd.Next(63, 68);
+                    caballo.EnergEsprint = rnd.Next(73, 78);
+                    caballo.Aceleracion = rnd.Next(10, 31) / 100.000 + 1;
                     caballo.Agilidad = rnd.Next(50, 65);
                     caballo.Salto = rnd.Next(50, 65);
                     break;
                 case 4:
-                    caballo.Velocidad = rnd.Next(65, 85);
-                    caballo.EnergEsprint = rnd.Next(65, 85);
-                    caballo.Aceleracion = rnd.Next(65, 85);
+                    caballo.Velocidad = rnd.Next(68, 73);
+                    caballo.EnergEsprint = rnd.Next(78, 83);
+                    caballo.Aceleracion = rnd.Next(20, 41)/100.000 + 1;
                     caballo.Agilidad = rnd.Next(65, 85);
                     caballo.Salto = rnd.Next(65, 85);
                     break;
                 case 5:
-                    caballo.Velocidad = rnd.Next(85, 105);
-                    caballo.EnergEsprint = rnd.Next(85, 105);
-                    caballo.Aceleracion = rnd.Next(85, 105);
+                    caballo.Velocidad = rnd.Next(73, 79);
+                    caballo.EnergEsprint = rnd.Next(73, 89);
+                    caballo.Aceleracion = rnd.Next(30, 51)/100.000 + 1;
                     caballo.Agilidad = rnd.Next(85, 105);
                     caballo.Salto = rnd.Next(85, 105);
                     break;
@@ -60,8 +60,9 @@ namespace ProyectoTaller
 
         public List<Caballo> CrearCaballos()
         {
+            var rnd = new Random();
 
-            int cantCaballos = 5;
+            int cantCaballos = (int)Math.Pow(2, rnd.Next(2,5));  //puede ser semifinal, cuartos de final , y octavo de final
 
             List<Caballo> listaCaballos = new List<Caballo>();
             for (int i = 0; i < cantCaballos; i++)
@@ -71,5 +72,8 @@ namespace ProyectoTaller
 
             return listaCaballos;
         }
+
+        //public void MatarCaballo(
+
     }
 }

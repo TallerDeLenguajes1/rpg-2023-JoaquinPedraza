@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ProyectoTaller.Pista;
 
 namespace ProyectoTaller
 {
@@ -142,22 +143,22 @@ namespace ProyectoTaller
             Ucraniano
         }
 
-        int velocidad;  //entre 50-65(3), 65-85(4), 85-105(5)
-        int energEsprint; //entre 50-65(3), 65-85(4), 85-105(5)
-        int aceleracion;  //entre 50-65(3), 65-85(4), 85-105(5)
-        int agilidad;   //entre 50-65(3), 65-85(4), 85-105(5)
-        int salto;     //entre 50-65(3), 65-85(4), 85-105(5)
-        int distancia; //entre 800 - 3200
+        double velocidad;  //entre 50-65(3), 65-85(4), 85-105(5)
+        double energEsprint; //entre 50-65(3), 65-85(4), 85-105(5)
+        double aceleracion;  //entre 50-65(3), 65-85(4), 85-105(5)
+        double agilidad;   //entre 50-65(3), 65-85(4), 85-105(5)
+        double salto;     //entre 50-65(3), 65-85(4), 85-105(5)
+        double distancia; //entre 800 - 3200
         TipoPista pista; //MUY BLANDA/BLANDA/MEDIA/FIRMA/DURA/MUY DURA
         int estrellas; //entre 3 y 5
 
 
-        public int Velocidad { get => velocidad; set => velocidad = value; }
-        public int EnergEsprint { get => energEsprint; set => energEsprint = value; }
-        public int Aceleracion { get => aceleracion; set => aceleracion = value; }
-        public int Agilidad { get => agilidad; set => agilidad = value; }
-        public int Salto { get => salto; set => salto = value; }
-        public int Distancia { get => distancia; set => distancia = value; }
+        public double Velocidad { get => velocidad; set => velocidad = value; }
+        public double EnergEsprint { get => energEsprint; set => energEsprint = value; }
+        public double Aceleracion { get => aceleracion; set => aceleracion = value; }
+        public double Agilidad { get => agilidad; set => agilidad = value; }
+        public double Salto { get => salto; set => salto = value; }
+        public double Distancia { get => distancia; set => distancia = value; }
         public int Estrellas { get => estrellas; set => estrellas = value; }
 
 
@@ -173,7 +174,304 @@ namespace ProyectoTaller
         public TipoPelaje Pelaje { get => pelaje; set => pelaje = value; }
         public DateTime FechaDeNacimiento { get => fechaDeNacimiento; set => fechaDeNacimiento = value; }
         public TipoPista Pista { get => pista; set => pista = value; }
+
+        public int Avanzar(Pista pistaC, bool isSprint, bool isAcelerated)
+        {
+            double avance;
+            if (!isSprint)
+            {
+                if (isAcelerated)
+                {   
+                    avance = velocidad / 10.00 * aceleracion * buffForPista(pista, pistaC) * buffForDistancia(distancia, pistaC) * (salto / 100.00 + 1.00) * (agilidad / 100.00 + 1.00);
+                    return (int)Math.Round(avance);
+                }
+                else
+                {
+                    avance = velocidad / 10.00 * buffForPista(pista, pistaC) * buffForDistancia(distancia, pistaC) * (salto / 100.00 + 1) * (agilidad / 100.00 + 1);
+                    return (int)Math.Round(avance);
+
+                }
+            }
+            else
+            {
+                if (isAcelerated)
+                {
+                    avance = energEsprint / 10 * aceleracion * buffForPista(pista, pistaC) * buffForDistancia(distancia, pistaC) * (salto / 100 + 1) * (agilidad / 100 + 1);
+                    return (int)Math.Round(avance);
+                }
+                else
+                {
+                    avance = energEsprint / 10 * buffForPista(pista, pistaC) * buffForDistancia(distancia, pistaC) * (salto / 100 + 1) * (agilidad / 100 + 1);
+                    return (int)Math.Round(avance);
+                }
+            }
+
+            double buffForPista(TipoPista pista, Pista pistaC)
+            {
+                switch (pista)
+                {
+                    case TipoPista.MuyBlanda:
+                        switch (pistaC.Suelo)
+                        {
+                            case 0:
+                                return 1.25;
+                            case (TipoDeSuelo)1:
+                                return 1.20;
+                            case (TipoDeSuelo)2:
+                                return 1.15;
+                            case (TipoDeSuelo)3:
+                                return 1.10;
+                            case (TipoDeSuelo)4:
+                                return 1.05;
+                            case (TipoDeSuelo)5:
+                                return 1;
+                            default:
+                                return 1;
+                        }
+                    case TipoPista.Blanda:
+                        switch (pistaC.Suelo)
+                        {
+                            case 0:
+                                return 1.20;
+                            case (TipoDeSuelo)1:
+                                return 1.25;
+                            case (TipoDeSuelo)2:
+                                return 1.20;
+                            case (TipoDeSuelo)3:
+                                return 1.15;
+                            case (TipoDeSuelo)4:
+                                return 1.10;
+                            case (TipoDeSuelo)5:
+                                return 1.05;
+                            default:
+                                return 1;
+                        }
+                    case TipoPista.Media:
+                        switch (pistaC.Suelo)
+                        {
+                            case 0:
+                                return 1.15;
+                            case (TipoDeSuelo)1:
+                                return 1.20;
+                            case (TipoDeSuelo)2:
+                                return 1.25;
+                            case (TipoDeSuelo)3:
+                                return 1.20;
+                            case (TipoDeSuelo)4:
+                                return 1.15;
+                            case (TipoDeSuelo)5:
+                                return 1.10;
+                            default:
+                                return 1;
+                        }
+                    case TipoPista.Firma:
+                        switch (pistaC.Suelo)
+                        {
+                            case 0:
+                                return 1.10;
+                            case (TipoDeSuelo)1:
+                                return 1.15;
+                            case (TipoDeSuelo)2:
+                                return 1.20;
+                            case (TipoDeSuelo)3:
+                                return 1.25;
+                            case (TipoDeSuelo)4:
+                                return 1.20;
+                            case (TipoDeSuelo)5:
+                                return 1.15;
+                            default:
+                                return 1;
+                        }
+                    case TipoPista.Dura:
+                        switch (pistaC.Suelo)
+                        {
+                            case 0:
+                                return 1.05;
+                            case (TipoDeSuelo)1:
+                                return 1.10;
+                            case (TipoDeSuelo)2:
+                                return 1.15;
+                            case (TipoDeSuelo)3:
+                                return 1.20;
+                            case (TipoDeSuelo)4:
+                                return 1.25;
+                            case (TipoDeSuelo)5:
+                                return 1.20;
+                            default:
+                                return 1;
+                        }
+                    case TipoPista.MuyDura:
+                        switch (pistaC.Suelo)
+                        {
+                            case 0:
+                                return 1.00;
+                            case (TipoDeSuelo)1:
+                                return 1.05;
+                            case (TipoDeSuelo)2:
+                                return 1.10;
+                            case (TipoDeSuelo)3:
+                                return 1.15;
+                            case (TipoDeSuelo)4:
+                                return 1.20;
+                            case (TipoDeSuelo)5:
+                                return 1.25;
+                            default:
+                                return 1;
+                        }
+                    default:
+                        return 1;
+                }
+            }
+
+            double buffForDistancia(double distancia, Pista pistaC)
+            {
+                switch (distancia)
+                {
+                    case 800:
+                        switch (pistaC.Longitud)
+                        {
+                            case 800:
+                                return 1.30;
+                            case 1200:
+                                return 1.25;
+                            case 1600:
+                                return 1.20;
+                            case 2000:
+                                return 1.15;
+                            case 2400:
+                                return 1.10;
+                            case 2800:
+                                return 1.05;
+                            case 3200:
+                                return 1.00;
+                            default:
+                                return 1;
+                        }
+                    case 1200:
+                        switch (pistaC.Longitud)
+                        {
+                            case 800:
+                                return 1.25;
+                            case 1200:
+                                return 1.30;
+                            case 1600:
+                                return 1.25;
+                            case 2000:
+                                return 1.20;
+                            case 2400:
+                                return 1.15;
+                            case 2800:
+                                return 1.10;
+                            case 3200:
+                                return 1.05;
+                            default:
+                                return 1;
+                        }
+                    case 1600:
+                        switch (pistaC.Longitud)
+                        {
+                            case 800:
+                                return 1.20;
+                            case 1200:
+                                return 1.25;
+                            case 1600:
+                                return 1.30;
+                            case 2000:
+                                return 1.25;
+                            case 2400:
+                                return 1.20;
+                            case 2800:
+                                return 1.15;
+                            case 3200:
+                                return 1.10;
+                            default:
+                                return 1;
+                        }
+                    case 2000:
+                        switch (pistaC.Longitud)
+                        {
+                            case 800:
+                                return 1.10;
+                            case 1200:
+                                return 1.15;
+                            case 1600:
+                                return 1.20;
+                            case 2000:
+                                return 1.30;
+                            case 2400:
+                                return 1.25;
+                            case 2800:
+                                return 1.20;
+                            case 3200:
+                                return 1.15;
+                            default:
+                                return 1;
+                        }
+                    case 2400:
+                        switch (pistaC.Longitud)
+                        {
+                            case 800:
+                                return 1.10;
+                            case 1200:
+                                return 1.15;
+                            case 1600:
+                                return 1.20;
+                            case 2000:
+                                return 1.25;
+                            case 2400:
+                                return 1.30;
+                            case 2800:
+                                return 1.25;
+                            case 3200:
+                                return 1.20;
+                            default:
+                                return 1;
+                        }
+                    case 2800:
+                        switch (pistaC.Longitud)
+                        {
+                            case 800:
+                                return 1.05;
+                            case 1200:
+                                return 1.10;
+                            case 1600:
+                                return 1.15;
+                            case 2000:
+                                return 1.20;
+                            case 2400:
+                                return 1.25;
+                            case 2800:
+                                return 1.30;
+                            case 3200:
+                                return 1.25;
+                            default:
+                                return 1;
+                        }
+                    case 3200:
+                        switch (pistaC.Longitud)
+                        {
+                            case 800:
+                                return 1.00;
+                            case 1200:
+                                return 1.05;
+                            case 1600:
+                                return 1.10;
+                            case 2000:
+                                return 1.15;
+                            case 2400:
+                                return 1.20;
+                            case 2800:
+                                return 1.25;
+                            case 3200:
+                                return 1.30;
+                            default:
+                                return 1;
+                        }
+                    default:
+                        return 1;
+                }
+
+            }
+        }
     }
-
-
 }
