@@ -12,8 +12,9 @@ namespace ProyectoTaller
         public Caballo CrearCaballo()
         {
             var rnd = new Random();
+
             Caballo caballo = new Caballo();
-            caballo.Nombre = "Chirs Titus";
+            caballo.Nombre = new api().GetHorseName();
 
             caballo.Estrellas = rnd.Next(3, 6);
 

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using static ProyectoTaller.Pista;
@@ -472,6 +473,11 @@ namespace ProyectoTaller
                 }
 
             }
+        }
+
+        private static void MostrarCaballo(Caballo caballo)
+        {
+            Console.WriteLine("Nombre: " + caballo.Nombre);
         }
     }
 }
