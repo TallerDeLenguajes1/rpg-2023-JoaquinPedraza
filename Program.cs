@@ -8,22 +8,13 @@ using System.Collections.Generic;
 using System.IO;
 
 
-
-
-
-Console.WriteLine("Hello, World!");
-
 CarreraDeCaballos carrera = new CarreraDeCaballos();
 
+
+carrera.Bienvenida();
 carrera.ObtenerParticipantes();
 carrera.RealizarTorneo();
 carrera.ObtenerGanador();
-
-
-
-
-
-
 
 Console.WriteLine("Helloworld!");
 

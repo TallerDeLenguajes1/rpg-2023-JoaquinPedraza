@@ -475,9 +475,27 @@ namespace ProyectoTaller
             }
         }
 
-        private static void MostrarCaballo(Caballo caballo)
+        public void MostrarCaballo()
         {
-            Console.WriteLine("Nombre: " + caballo.Nombre);
+
+            Console.WriteLine();
+            Console.WriteLine("/--------------------------"+ Nombre.ToUpper() + "--------------("+ estrellas + ") estrellas -------------/");
+            Console.WriteLine();
+            Console.WriteLine("DATOS");
+            Console.WriteLine("Edad: " + Edad);
+            Console.WriteLine("Raza: " + raza);
+            Console.WriteLine("Pelaje: " + pelaje);
+            Console.WriteLine("Fecha de Nacimiento: " + fechaDeNacimiento);
+            Console.WriteLine();
+            Console.WriteLine("ESTADISTICAS");
+            Console.WriteLine("Velocidad: " + velocidad);
+            Console.WriteLine("Velocidad Sprint: " + energEsprint);
+            Console.WriteLine("Aceleracion: " + aceleracion);
+            Console.WriteLine("Agilidad: " + agilidad);
+            Console.WriteLine("Salto: " + salto);
+            Console.WriteLine("Distancia: " + distancia);
+            Console.WriteLine("Tipo de pista: " + pista);
+
         }
     }
 }
